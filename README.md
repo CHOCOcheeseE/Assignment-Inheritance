@@ -1,4 +1,4 @@
-# 📚  Assignment Inheritance dalam Java
+# 📚  Assignment 3 Inheritance dalam Java
 
 Selamat datang di dokumentasi pembelajaran saya tentang **Object-Oriented Programming (OOP) Inheritance** dalam bahasa pemrograman Java! 🚀 Di sini, saya akan menjelaskan konsep inheritance (pewarisan) dengan contoh konkret menggunakan bangun datar. Mari kita mulai!
 

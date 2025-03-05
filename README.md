@@ -1,146 +1,220 @@
-# 📚 Perjalanan Belajar "Pewarisan OOP" dengan Java
+# 📚 Belajar OOP Inheritance dalam Java: Menghitung Luas dan Keliling Bangun Datar 🚀
 
 ## 📑 Daftar Isi
-- [📐 Kelas `BangunDatar` (Superclass)](#-kelas-bangun-datar-superclass)
-- [🟦 Kelas `BujurSangkar`](#-kelas-bujursangkar)
-- [📏 Kelas `PersegiPanjang`](#-kelas-persegipanjang)
-- [🔺 Kelas `Segitiga`](#-kelas-segitiga)
-- [🚀 Menjalankan Program](#-menjalankan-program)
-- [🔗 Referensi](#-referensi)
+1. [Pengenalan](#-pengenalan)
+2. [Struktur Program](#-struktur-program)
+   - [BangunDatar.java (Superclass)](#-bangundatarjava-superclass)
+   - [BujurSangkar.java (Subclass)](#-bujursangkarjava-subclass)
+   - [PersegiPanjang.java (Subclass)](#-persegipanjangjava-subclass)
+   - [Segitiga.java (Subclass)](#-segitigajava-subclass)
+3. [Penjelasan Kode](#-penjelasan-kode)
+4. [Referensi](#-referensi)
+5. [Kembali ke Daftar Isi](#-kembali-ke-daftar-isi)
 
 ---
 
-## 📐 Kelas `BangunDatar` (Superclass)
-**Kelas induk** yang menjadi dasar untuk semua bangun datar. Mengandung metode umum untuk menghitung luas dan keliling.
+## 🌟 Pengenalan
 
-### 🔑 Fitur Utama:
+Dalam dokumentasi ini, kita akan mempelajari konsep **Pemrograman Berorientasi Objek (OOP)** dalam Java, khususnya **inheritance (pewarisan)**, melalui contoh program yang menghitung luas dan keliling berbagai bangun datar seperti **Bujur Sangkar**, **Persegi Panjang**, dan **Segitiga**. Program ini menggunakan konsep inheritance untuk memisahkan logika umum dan spesifik dari setiap bangun datar.
+
+---
+
+## 🏗️ Struktur Program
+
+Program ini terdiri dari satu **superclass** (`BangunDatar`) dan tiga **subclass** (`BujurSangkar`, `PersegiPanjang`, dan `Segitiga`). Setiap subclass mewarisi metode dari superclass dan meng-override metode tersebut untuk menghitung luas dan keliling sesuai dengan bentuknya.
+
+---
+
+### 📂 BangunDatar.java (Superclass)
+
 ```java
+import java.util.Scanner;
+
 public class BangunDatar {
-    public double luas() { return 0; }
-    public double keliling() { return 0; }
-    
+    public double luas() {
+        return 0;
+    }
+
+    public double keliling() {
+        return 0;
+    }
+
     public static void main(String[] args) {
-        // Implementasi menu interaktif
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("=====================================");
+        System.out.println("Silahkan Pilih Bangun Datar:");
+        System.out.println("1. Bujur Sangkar");
+        System.out.println("2. Persegi Panjang");
+        System.out.println("3. Segitiga");
+        System.out.println("=====================================");
+
+        int pilihan = scanner.nextInt();
+
+        if (pilihan == 1) {
+            System.out.print("Masukkan panjang sisi: ");
+            double sisi = scanner.nextDouble();
+            BujurSangkar bs = new BujurSangkar(sisi);
+            System.out.println("Luas: " + bs.luas());
+            System.out.println("Keliling: " + bs.keliling());
+        } else if (pilihan == 2) {
+            System.out.print("Masukkan panjang: ");
+            double panjang = scanner.nextDouble();
+            System.out.print("Masukkan lebar: ");
+            double lebar = scanner.nextDouble();
+            PersegiPanjang pp = new PersegiPanjang(panjang, lebar);
+            System.out.println("Luas: " + pp.luas());
+            System.out.println("Keliling: " + pp.keliling());
+        } else if (pilihan == 3) {
+            System.out.println("Pilih Jenis Segitiga:");
+            System.out.println("1. Segitiga Siku-siku");
+            System.out.println("2. Segitiga dengan 3 sisi (Heron)");
+            System.out.println("3. Segitiga dengan 2 sisi & sudut");
+            int jenisSegitiga = scanner.nextInt();
+            // Logika untuk segitiga
+        }
+        scanner.close();
     }
 }
 ```
-- 💡 **Polimorfisme**: Metode `luas()` dan `keliling()` di-override oleh subclass
-- 🖥️ **Program Utama**: Menyediakan menu interaktif untuk memilih bangun datar
 
-### 🌍 Contoh Penggunaan Dunia Nyata:
-- Aplikasi kalkulator geometri
-- Sistem penghitungan material konstruksi
-
-[🔙 Kembali ke Daftar Isi](#-daftar-isi)
+#### 💡 Penjelasan:
+- **`import java.util.Scanner;`**: Digunakan untuk menerima input dari pengguna.
+- **`public class BangunDatar`**: Kelas induk (superclass) yang berisi metode umum untuk menghitung luas dan keliling.
+- **`luas()` dan `keliling()`**: Metode ini akan di-override oleh subclass.
+- **`main()`**: Program utama yang meminta pengguna memilih bangun datar dan menghitung luas serta kelilingnya.
 
 ---
 
-## 🟦 Kelas `BujurSangkar
-**Subclass khusus** untuk bujur sangkar. Menggunakan satu sisi untuk menghitung luas dan keliling.
+### 📂 BujurSangkar.java (Subclass)
 
-### 🧩 Konstruktor:
 ```java
-public BujurSangkar(double sisi) {
-    this.sisi = sisi;
+public class BujurSangkar extends BangunDatar {
+    private double sisi;
+
+    public BujurSangkar(double sisi) {
+        this.sisi = sisi;
+    }
+
+    @Override
+    public double luas() {
+        return sisi * sisi;
+    }
+
+    @Override
+    public double keliling() {
+        return 4 * sisi;
+    }
 }
 ```
 
-### 📊 Metode:
-| Metode     | Rumus           | Contoh Input | Output |
-|------------|-----------------|--------------|--------|
-| `luas()`     | sisi²           | sisi=5       | 25     |
-| `keliling()` | 4 × sisi        | sisi=3       | 12     |
-
-[🔙 Kembali ke Daftar Isi](#-daftar-isi)
+#### 💡 Penjelasan:
+- **`extends BangunDatar`**: Subclass `BujurSangkar` mewarisi metode dari `BangunDatar`.
+- **`private double sisi;`**: Variabel untuk menyimpan panjang sisi.
+- **`luas()` dan `keliling()`**: Meng-override metode dari superclass untuk menghitung luas dan keliling bujur sangkar.
 
 ---
 
-## 📏 Kelas `PersegiPanjang
-Mewakili persegi panjang dengan panjang dan lebar berbeda.
+### 📂 PersegiPanjang.java (Subclass)
 
-### 🛠️ Cara Penggunaan:
 ```java
-PersegiPanjang pp = new PersegiPanjang(7, 4);
-System.out.println(pp.luas()); // Output: 28
-```
+public class PersegiPanjang extends BangunDatar {
+    private double panjang, lebar;
 
-### 🔍 Perbandingan dengan Bujur Sangkar:
-| Fitur          | Bujur Sangkar | Persegi Panjang |
-|----------------|---------------|-----------------|
-| Jumlah sisi unik | 1             | 2               |
-| Rumus keliling | 4×sisi        | 2×(panjang+lebar) |
+    public PersegiPanjang(double panjang, double lebar) {
+        this.panjang = panjang;
+        this.lebar = lebar;
+    }
 
-[🔙 Kembali ke Daftar Isi](#-daftar-isi)
+    @Override
+    public double luas() {
+        return panjang * lebar;
+    }
 
----
-
-## 🔺 Kelas `Segitiga
-**Paling kompleks** dengan 3 jenis konstruktor berbeda untuk berbagai tipe segitiga.
-
-### 🎛️ Jenis Konstruktor:
-1. **Segitiga Siku-siku**  
-   ```java
-   new Segitiga(alas, tinggi);
-   ```
-2. **Rumus Heron (3 sisi)**  
-   ```java
-   new Segitiga(sisiA, sisiB, sisiC);
-   ```
-3. **Dua Sisi + Sudut**  
-   ```java
-   new Segitiga(sisi1, sisi2, sudut, true);
-   ```
-
-### 🌟 Metode Khusus:
-```java
-public String jenisSegitiga() {
-    // Mendeteksi jenis segitiga berdasarkan sisi
+    @Override
+    public double keliling() {
+        return 2 * (panjang + lebar);
+    }
 }
 ```
-- 🔎 Mengembalikan: "Sama Sisi", "Sama Kaki", atau "Sembarang"
 
-### 📝 Contoh Perhitungan Sudut:
+#### 💡 Penjelasan:
+- **`private double panjang, lebar;`**: Variabel untuk menyimpan panjang dan lebar.
+- **`luas()` dan `keliling()`**: Meng-override metode dari superclass untuk menghitung luas dan keliling persegi panjang.
+
+---
+
+### 📂 Segitiga.java (Subclass)
+
 ```java
-// Menggunakan hukum cosinus
-Math.cos(Math.toRadians(sudut))
+public class Segitiga extends BangunDatar {
+    private double alas, tinggi, sisi1, sisi2, sisi3, sudut;
+    private char tipe;
+
+    // Segitiga Siku-siku
+    public Segitiga(double alas, double tinggi) {
+        this.alas = alas;
+        this.tinggi = tinggi;
+        this.tipe = 'S';
+    }
+
+    // Segitiga dengan 3 sisi (Heron)
+    public Segitiga(double sisi1, double sisi2, double sisi3) {
+        this.sisi1 = sisi1;
+        this.sisi2 = sisi2;
+        this.sisi3 = sisi3;
+        this.tipe = 'H';
+    }
+
+    // Segitiga dengan 2 sisi & sudut
+    public Segitiga(double sisi1, double sisi2, double sudut, boolean pakaiSudut) {
+        this.sisi1 = sisi1;
+        this.sisi2 = sisi2;
+        this.sudut = sudut;
+        this.tipe = 'A';
+    }
+
+    @Override
+    public double luas() {
+        switch (tipe) {
+            case 'S': return (alas * tinggi) / 2;
+            case 'H':
+                double s = (sisi1 + sisi2 + sisi3) / 2;
+                return Math.sqrt(s * (s - sisi1) * (s - sisi2) * (s - sisi3));
+            case 'A': return 0.5 * sisi1 * sisi2 * Math.sin(Math.toRadians(sudut));
+            default: return 0;
+        }
+    }
+
+    public String jenisSegitiga() {
+        if (sisi1 == sisi2 && sisi2 == sisi3) return "Segitiga Sama Sisi";
+        else if (sisi1 == sisi2 || sisi2 == sisi3 || sisi1 == sisi3) return "Segitiga Sama Kaki";
+        else return "Segitiga Sembarang";
+    }
+}
 ```
 
-[🔙 Kembali ke Daftar Isi](#-daftar-isi)
+#### 💡 Penjelasan:
+- **`private double alas, tinggi, sisi1, sisi2, sisi3, sudut;`**: Variabel untuk menyimpan atribut segitiga.
+- **`tipe`**: Menentukan metode perhitungan luas.
+- **`luas()`**: Menggunakan rumus yang berbeda berdasarkan tipe segitiga.
+- **`jenisSegitiga()`**: Menentukan jenis segitiga berdasarkan panjang sisi.
 
 ---
 
-## 🚀 Menjalankan Program
-**Langkah-langkah eksekusi:**
-1. Kompilasi semua file `.java`:
-   ```bash
-   javac BangunDatar.java
-   ```
-2. Jalankan program utama:
-   ```bash
-   java BangunDatar
-   ```
-3. Ikuti menu interaktif:
-   ```
-   1. Bujur Sangkar
-   2. Persegi Panjang
-   3. Segitiga
-   ```
+## 📝 Penjelasan Kode
 
-### 🧪 Test Case Contoh:
-| Pilihan | Input           | Luas  | Keliling |
-|---------|-----------------|-------|----------|
-| 1       | sisi=4          | 16    | 16       |
-| 2       | panjang=3, lebar=6 | 18    | 18       |
-| 3 (t1)  | alas=5, tinggi=12 | 30    | 30       |
-
-[🔙 Kembali ke Daftar Isi](#-daftar-isi)
+Program ini menggunakan konsep **inheritance** untuk memisahkan logika umum dan spesifik. Superclass `BangunDatar` berisi metode umum, sementara subclass (`BujurSangkar`, `PersegiPanjang`, dan `Segitiga`) meng-override metode tersebut untuk menghitung luas dan keliling sesuai dengan bentuknya.
 
 ---
 
-## 🔗 Referensi
-- 📜 [Dokumentasi Resmi Java](https://docs.oracle.com/javase/8/docs/api/)
-- 📖 [Tutorial Pewarisan OOP oleh Oracle](https://docs.oracle.com/javase/tutorial/java/IandI/subclasses.html)
-- 🎥 [Video Tutorial: Polimorfisme di Java](https://www.youtube.com/watch?v=0xw06loTm1k)
+## 📚 Referensi
 
-[🔙 Kembali ke Daftar Isi](#-daftar-isi)
-``` 
+1. [Java Documentation](https://docs.oracle.com/javase/tutorial/)
+2. [OOP Concepts in Java](https://www.geeksforgeeks.org/object-oriented-programming-oops-concept-in-java/)
+3. [Heron's Formula](https://en.wikipedia.org/wiki/Heron%27s_formula)
+
+---
+
+## 🔙 Kembali ke Daftar Isi
+
+[Kembali ke Daftar Isi](#-daftar-isi)

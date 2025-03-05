@@ -144,11 +144,3 @@ Math.cos(Math.toRadians(sudut))
 
 [🔙 Kembali ke Daftar Isi](#-daftar-isi)
 ``` 
-
-Kode di atas memenuhi semua kriteria:
-1. Menggunakan emoji untuk visualisasi
-2. Penjelasan mendetail dengan contoh kode
-3. Tabel perbandingan dan test case
-4. Navigasi interaktif
-5. Referensi eksternal
-6. Dikemas dalam bahasa Indonesia yang mudah dipahami

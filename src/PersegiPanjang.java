@@ -1,6 +1,5 @@
 public class PersegiPanjang extends BangunDatar {
-    double panjang;
-    double lebar;
+    private double panjang, lebar;
 
     public PersegiPanjang(double panjang, double lebar) {
         this.panjang = panjang;
@@ -8,13 +7,12 @@ public class PersegiPanjang extends BangunDatar {
     }
 
     @Override
-    public double hitungLuas() {
+    public double luas() {
         return panjang * lebar;
     }
 
     @Override
-    public double hitungKeliling() {
+    public double keliling() {
         return 2 * (panjang + lebar);
     }
-
 }

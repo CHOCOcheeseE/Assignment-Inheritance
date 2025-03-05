@@ -1,17 +1,17 @@
 public class BujurSangkar extends BangunDatar {
-    double sisi;
+    private double sisi;
 
     public BujurSangkar(double sisi) {
         this.sisi = sisi;
     }
 
     @Override
-    public double hitungLuas() {
+    public double luas() {
         return sisi * sisi;
     }
 
     @Override
-    public double hitungKeliling() {
+    public double keliling() {
         return 4 * sisi;
     }
 }
